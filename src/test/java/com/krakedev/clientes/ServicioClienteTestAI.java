@@ -19,7 +19,7 @@ public class ServicioClienteTestAI {
     public void testCrearClienteExito() {
         // Validación: Verifica que un cliente nuevo se agregue correctamente a la lista.
         ServicioCliente servicio = new ServicioCliente();
-        Cliente nuevoCliente = new Cliente("1717171717", "Juan", "Perez");
+        Cliente nuevoCliente = new Cliente("1717171717", "Juan", "Perez","jperez@gmail.com");
 
         Cliente resultado = servicio.crear(nuevoCliente);
 
@@ -32,8 +32,8 @@ public class ServicioClienteTestAI {
     public void testCrearClienteDuplicado() {
         // Validación: Verifica que no se pueda crear un cliente si la cédula ya existe.
         ServicioCliente servicio = new ServicioCliente();
-        Cliente cliente1 = new Cliente("1717171717", "Juan", "Perez");
-        Cliente cliente2 = new Cliente("1717171717", "Carlos", "Lopez"); // Misma cédula
+        Cliente cliente1 = new Cliente("1717171717", "Juan", "Perez","jperez@gmail.com");
+        Cliente cliente2 = new Cliente("1717171717", "Carlos", "Lopez","clopez@gmail.com"); // Misma cédula
 
         servicio.crear(cliente1);
         Cliente resultado = servicio.crear(cliente2); // Intento de duplicado
@@ -50,7 +50,7 @@ public class ServicioClienteTestAI {
     public void testBuscarPorCedulaEncontrado() {
         // Validación: Verifica que se recupere correctamente un cliente que sí existe.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("1818181818", "Ana", "Gomez"));
+        servicio.crear(new Cliente("1818181818", "Ana", "Gomez","agomez@gmail.com"));
 
         Cliente encontrado = servicio.buscarPorCedula("1818181818");
 
@@ -62,7 +62,7 @@ public class ServicioClienteTestAI {
     public void testBuscarPorCedulaNoEncontrado() {
         // Validación: Verifica que retorne null al buscar una cédula inexistente.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("1818181818", "Ana", "Gomez"));
+        servicio.crear(new Cliente("1818181818", "Ana", "Gomez","agomez@gmail.com"));
 
         Cliente encontrado = servicio.buscarPorCedula("0000000000");
 
@@ -73,8 +73,8 @@ public class ServicioClienteTestAI {
     public void testListarClientes() {
         // Validación: Verifica que el método devuelva la lista completa de clientes.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("111", "A", "B"));
-        servicio.crear(new Cliente("222", "C", "D"));
+        servicio.crear(new Cliente("111", "A", "B","ab@gmail.com"));
+        servicio.crear(new Cliente("222", "C", "D","cd@gmail.com"));
 
         List<Cliente> lista = servicio.listar();
 
@@ -89,9 +89,9 @@ public class ServicioClienteTestAI {
     public void testActualizarClienteExito() {
         // Validación: Verifica que se actualicen los datos de un cliente existente.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("12345", "Luis", "Ruiz"));
+        servicio.crear(new Cliente("12345", "Luis", "Ruiz","luis@gmail.com"));
 
-        Cliente datosNuevos = new Cliente("12345", "Luis Mario", "Ruiz Update");
+        Cliente datosNuevos = new Cliente("12345", "Luis Mario", "Ruiz Update","luism@gmail.com");
         Cliente resultado = servicio.actualizar("12345", datosNuevos);
 
         assertNotNull(resultado, "Debe retornar el cliente actualizado.");
@@ -103,7 +103,7 @@ public class ServicioClienteTestAI {
     public void testActualizarClienteInexistente() {
         // Validación: Verifica que retorne null al intentar actualizar un cliente que no existe.
         ServicioCliente servicio = new ServicioCliente();
-        Cliente datosNuevos = new Cliente("999", "Fantasma", "No Existe");
+        Cliente datosNuevos = new Cliente("999", "Fantasma", "No Existe","no@correo.com");
 
         Cliente resultado = servicio.actualizar("999", datosNuevos);
 
@@ -118,7 +118,7 @@ public class ServicioClienteTestAI {
     public void testEliminarClienteExito() {
         // Validación: Verifica que un cliente existente sea removido de la lista.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("555", "Pedro", "Perez"));
+        servicio.crear(new Cliente("555", "Pedro", "Perez","pperez@gmail.com"));
 
         boolean resultado = servicio.eliminar("555");
 
@@ -130,7 +130,7 @@ public class ServicioClienteTestAI {
     public void testEliminarClienteInexistente() {
         // Validación: Verifica que retorne false al intentar eliminar una cédula que no está registrada.
         ServicioCliente servicio = new ServicioCliente();
-        servicio.crear(new Cliente("555", "Pedro", "Perez"));
+        servicio.crear(new Cliente("555", "Pedro", "Perez","jperez@gmail.com"));
 
         boolean resultado = servicio.eliminar("444"); // Cédula que no existe
 
