@@ -25,7 +25,7 @@ public class ClienteTest {
     @Test
     // Validar que el constructor con parámetros asigne la información de manera inmediata
     void testConstructorParametrosYGetters() {
-        Cliente cliente = new Cliente("1711111111", "Ana", "Gomez");
+        Cliente cliente = new Cliente("1711111111", "Ana", "Gomez","agomez@gmail.com");
 
         assertEquals("1711111111", cliente.getCedula());
         assertEquals("Ana", cliente.getNombre());
@@ -35,7 +35,7 @@ public class ClienteTest {
     @Test
     // Validar que el método toString concatene correctamente los atributos de la clase
     void testToString() {
-        Cliente cliente = new Cliente("1722222222", "Carlos", "Ruiz");
+        Cliente cliente = new Cliente("1722222222", "Carlos", "Ruiz","cruiz@gmail.com");
         String esperado = "Cliente [cedula=1722222222, nombre=Carlos, apellido=Ruiz]";
         
         assertEquals(esperado, cliente.toString());

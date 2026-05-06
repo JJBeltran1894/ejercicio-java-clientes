@@ -21,7 +21,7 @@ public class ServicioClienteTest {
     @Test
     // Camino Feliz: Validar que un cliente nuevo se agregue correctamente a la lista (entra al else)
     void testCrearClienteNuevoExito() {
-        Cliente nuevo = new Cliente("1234567890", "Luis", "Mena");
+        Cliente nuevo = new Cliente("1234567890", "Luis", "Mena","lmena@gmail.com");
         Cliente resultado = servicio.crear(nuevo);
 
         assertNotNull(resultado);
@@ -32,9 +32,9 @@ public class ServicioClienteTest {
     @Test
     // Escenario de Fallo: Validar que no se cree un cliente si la cédula ya existe (entra al if)
     void testCrearClienteDuplicadoFallo() {
-        servicio.crear(new Cliente("1234567890", "Luis", "Mena"));
+        servicio.crear(new Cliente("1234567890", "Luis", "Mena", "lmena@gmail.com"));
         
-        Cliente duplicado = new Cliente("1234567890", "Otro", "Nombre");
+        Cliente duplicado = new Cliente("1234567890", "Otro", "Nombre","onombre@gmail.com");
         Cliente resultado = servicio.crear(duplicado);
 
         assertNull(resultado);
@@ -44,7 +44,7 @@ public class ServicioClienteTest {
     @Test
     // Camino Feliz: Validar que se encuentre un cliente existente por su cédula
     void testBuscarPorCedulaExito() {
-        servicio.crear(new Cliente("0987654321", "Maria", "Paz"));
+        servicio.crear(new Cliente("0987654321", "Maria", "Paz","mpaz@gmail.com"));
         Cliente encontrado = servicio.buscarPorCedula("0987654321");
 
         assertNotNull(encontrado);
@@ -61,8 +61,8 @@ public class ServicioClienteTest {
     @Test
     // Camino Feliz: Validar que listar retorne todos los elementos almacenados
     void testListar() {
-        servicio.crear(new Cliente("111", "A", "B"));
-        servicio.crear(new Cliente("222", "C", "D"));
+        servicio.crear(new Cliente("111", "A", "B","ab@gmail.com"));
+        servicio.crear(new Cliente("222", "C", "D","cd@gmail.com"));
         
         List<Cliente> lista = servicio.listar();
         assertEquals(2, lista.size());
@@ -71,9 +71,9 @@ public class ServicioClienteTest {
     @Test
     // Camino Feliz: Validar que se actualicen los datos de un cliente existente (entra al if)
     void testActualizarClienteExito() {
-        servicio.crear(new Cliente("555", "Viejo", "Nombre"));
+        servicio.crear(new Cliente("555", "Viejo", "Nombre","vnombre@gmail.com"));
         
-        Cliente datosNuevos = new Cliente("555", "Nuevo", "Apellido");
+        Cliente datosNuevos = new Cliente("555", "Nuevo", "Apellido","nuevo@gmail.com");
         Cliente resultado = servicio.actualizar("555", datosNuevos);
 
         assertNotNull(resultado);
@@ -84,7 +84,7 @@ public class ServicioClienteTest {
     @Test
     // Escenario de Fallo: Validar que retorne null si se intenta actualizar un cliente que no existe
     void testActualizarClienteNoExistente() {
-        Cliente datosNuevos = new Cliente("777", "Fantasma", "Gomez");
+        Cliente datosNuevos = new Cliente("777", "Fantasma", "Gomez","fgomez@gmail.com");
         Cliente resultado = servicio.actualizar("777", datosNuevos);
 
         assertNull(resultado);
@@ -93,7 +93,7 @@ public class ServicioClienteTest {
     @Test
     // Camino Feliz: Validar que se elimine correctamente un cliente existente (entra al if)
     void testEliminarClienteExito() {
-        servicio.crear(new Cliente("888", "Para", "Borrar"));
+        servicio.crear(new Cliente("888", "Para", "Borrar","no@correo.com"));
         boolean eliminado = servicio.eliminar("888");
 
         assertTrue(eliminado);
